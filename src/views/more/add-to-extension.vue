@@ -7,30 +7,22 @@
           <p class="left-content">{{ $t('add.slogan') }}</p>
         </div>
         <div class="head-right">
-          <div
-            @click="
-              () => {
-                return (curNetwork = 'mainnet')
-              }
-            "
-            class="head-net-box"
-          >
+          <div @click="
+            () => {
+              return (curNetwork = 'mainnet')
+            }
+          " class="head-net-box">
             Mainnet
           </div>
-          <div
-            @click="
-              () => {
-                return (curNetwork = 'devnet')
-              }
-            "
-            class="head-net-box"
-          >
+          <div @click="
+            () => {
+              return (curNetwork = 'devnet')
+            }
+          " class="head-net-box">
             Devnet
           </div>
-          <div
-            class="move-box"
-            :class="curNetwork === 'mainnet' ? 'normal-left' : windowWidth < 750 ? 'mobile-left' : 'spec-left'"
-          >
+          <div class="move-box"
+            :class="curNetwork === 'mainnet' ? 'normal-left' : windowWidth < 750 ? 'mobile-left' : 'spec-left'">
             {{ curNetwork === 'mainnet' ? 'Mainnet' : 'Devnet' }}
           </div>
         </div>
@@ -73,17 +65,13 @@
             </a>
           </div>
         </div>
-        <div
-          v-if="windowWidth < 750"
-          class="btn white"
-          @click="
+        <div v-if="windowWidth < 750" class="btn white" @click="
             if (isInApp) {
-              setupNetwork(supportList[curNetwork])
-            } else {
-              dialogVisible = true
-            }
-          "
-        >
+          setupNetwork(supportList[curNetwork])
+        } else {
+          dialogVisible = true
+        }
+          ">
           {{ $t('add.addToWallet') }}
         </div>
         <div class="network-box" v-for="token in supportList[curNetwork].tokens">
@@ -107,16 +95,13 @@
           </el-col>
           <el-col :span="windowWidth < 750 ? 24 : 6">
             <div class="flex-end">
-              <div
-                class="btn black"
-                @click="
+              <div class="btn black" @click="
                   if (isInMobileBrowser) {
-                    dialogVisible = true
-                  } else {
-                    onWatchAsset(supportList[curNetwork], token)
-                  }
-                "
-              >
+                dialogVisible = true
+              } else {
+                onWatchAsset(supportList[curNetwork], token)
+              }
+                ">
                 {{ $t('add.addToWallet') }}
               </div>
             </div>
@@ -124,12 +109,8 @@
         </div>
       </div>
     </div>
-    <el-dialog
-      custom-class="connect-dialog"
-      :title="$t('add.connectWallet')"
-      :visible.sync="dialogVisible"
-      :width="windowWidth < 750 ? '80%' : '500px'"
-    >
+    <el-dialog custom-class="connect-dialog" :title="$t('add.connectWallet')" :visible.sync="dialogVisible"
+      :width="windowWidth < 750 ? '80%' : '500px'">
       <div class="connect-dialog-box">
         <!-- <p class="connect-dialog-title">Connect Wallet with</p> -->
         <div v-for="item in walletList" :key="item.id" class="connect-dialog-content" @click="item.connect">
@@ -198,33 +179,64 @@ export default {
             },
           ],
         },
+        // devnet: {
+        //   id: 2,
+        //   network: 'PlatON Dev Testnet2',
+        //   netLabel: 'PlatON Devnet',
+        //   icon: platon,
+        //   chainId: 2206132,
+        //   currency: 'lat',
+        //   currencyLabel: 'LAT',
+        //   rpc: 'https://devnet2openapi.platon.network/rpc',
+        //   explorer: 'https://devnet2scan.platon.network',
+        //   faucet: 'https://devnet2faucet.platon.network/faucet',
+        //   decimal: 18,
+        //   tokens: [
+        //     {
+        //       id: 21,
+        //       icon: dusdIcon,
+        //       label: 'DUSD（Devnet)',
+        //       symbol: 'DUSD',
+        //       contractAddress: '0x085d18AB4FFD350d32025bc6a641E27C2Ea806a9',
+        //       decimal: 6,
+        //     },
+        //     {
+        //       id: 22,
+        //       icon: usdt,
+        //       label: 'USDT（Devnet) ',
+        //       symbol: 'USDT',
+        //       contractAddress: '0x1e6E4b48F6F57Aa7cefd8239e8515694D110386B',
+        //       decimal: 6,
+        //     },
+        //     {
+        //       id: 23,
+        //       icon: usdc,
+        //       label: 'USDC（Devnet)',
+        //       symbol: 'USDC',
+        //       contractAddress: '0x229b68722bF16CCc7186Dc8760b3D8C5980fe609',
+        //       decimal: 6,
+        //     },
+        //   ],
+        // },
         devnet: {
           id: 2,
-          network: 'PlatON Dev Testnet2',
-          netLabel: 'PlatON Devnet',
+          network: 'PlatON Dev Testnet3',
+          netLabel: 'PlatON Devnet3',
           icon: platon,
-          chainId: 2206132,
+          chainId: 20250407,
           currency: 'lat',
           currencyLabel: 'LAT',
-          rpc: 'https://devnet2openapi.platon.network/rpc',
-          explorer: 'https://devnet2scan.platon.network',
-          faucet: 'https://devnet2faucet.platon.network/faucet',
+          rpc: 'https://devnet3openapi.platon.network/rpc',
+          explorer: 'https://devnet3scan.platon.network/',
+          faucet: 'https://devnet3faucet.platon.network/faucet',
           decimal: 18,
           tokens: [
-            {
-              id: 21,
-              icon: dusdIcon,
-              label: 'DUSD（Devnet)',
-              symbol: 'DUSD',
-              contractAddress: '0x085d18AB4FFD350d32025bc6a641E27C2Ea806a9',
-              decimal: 6,
-            },
             {
               id: 22,
               icon: usdt,
               label: 'USDT（Devnet) ',
               symbol: 'USDT',
-              contractAddress: '0x1e6E4b48F6F57Aa7cefd8239e8515694D110386B',
+              contractAddress: '0x3349691C210553F1082846457073C0b9019dea31',
               decimal: 6,
             },
             {
@@ -232,7 +244,7 @@ export default {
               icon: usdc,
               label: 'USDC（Devnet)',
               symbol: 'USDC',
-              contractAddress: '0x229b68722bF16CCc7186Dc8760b3D8C5980fe609',
+              contractAddress: '0xFF8dEe9983768D0399673014cf77826896F97e4d',
               decimal: 6,
             },
           ],
@@ -352,7 +364,7 @@ export default {
         // app 浏览器端
         if (this.isBitgetWallet) {
           // bitget app 返回的东西无法分清成功失败，全依赖于内部的提示
-          return () => {}
+          return () => { }
         }
 
         if (this.isOkxWallet) {
@@ -467,7 +479,7 @@ export default {
       return /iPhone|iPad|iPod/i.test(navigator.userAgent)
     },
   },
-  mounted() {},
+  mounted() { },
 }
 </script>
 <style lang="less">
@@ -514,10 +526,12 @@ export default {
 .content-wrap {
   position: relative;
   margin-bottom: 40px;
+
   .connect-dialog-box {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     .connect-dialog-title {
       font-size: 14px;
       line-height: 16px;
@@ -535,6 +549,7 @@ export default {
       text-align: center;
       cursor: pointer;
       align-self: center;
+
       .connect-dialog-inner-box {
         color: #fff;
         display: flex;
@@ -543,10 +558,12 @@ export default {
         width: 120px;
         gap: 14px;
         justify-self: center;
+
         img {
           width: 32px;
           height: 32px;
         }
+
         span {
           font-size: 14px;
           line-height: 22px;
